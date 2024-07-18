@@ -1,81 +1,81 @@
-// Asynchronous Programming
+// Object Destructing
 
-// Promises
+// In object Destructing we access the object data by values name without any order.
 
-// This features of es6 make a promise that the code will execute. if it successfully executed or failed in both cases user or subscriber will be notified.
+let obj = {
+  name: "zainab",
+  age: 20,
+  designation: "Web developer",
+  qualification: "Bachlor",
+  gender: "female",
+};
+
+
+let { designation, name } = obj;
+
+console.log("Designation:  " + designation + ",  Name:  " + name);
+
+
+
+
+
+//Array Destructing
+
+
+const std = ["Ali", "Balla", "Cella", "Danial"];
+
+let [s1, s2] = std;
+
+console.log(`${s1} and ${s2} are Students`); //output:Ali and Bella are students
+
+
+
+
+
+//Spread Operator
+
+// This operator is used to divide the content of iterables like array,strings and obj into
+// individuals elements.
+
+
+const n1 = [1, 2, 3];
+const n2 = [4, 5, 6];
+
+const combined = [...n1, ...n2];
+console.log("Spread operator is called",combined);
+
+
+
+
+
+
+
+
+
+
+// ----------Rest Operator
+
+// we use rest parameter when user wants to enter indefinite number of values in function argument and those values are stored in the form of array, we traverse through that array using loop to perform specific operation
 
 // 1)
 
-let p = new Promise((resolve, reject) => {
-  console.log("Promise is pending");
-  resolve("I'm resolved");
-  reject(new Error("I'm rejected"));
-});
-// then and catch are promise consumers,which are used to get the value of resolve and reject
-p.then((v) => {
-  console.log("value ", v); //this wil output the value of resolve
-});
-p.catch((err) => {
-  console.log("Error", err); //present an error i'm rejected
-});
-p.finally(() => {
-  console.log("I will run at any cost");
-});
-
-// promise chaning
-
-const data = (d) => {
-  return new Promise((resolve, reject) => {
-    if (d) {
-      resolve(`The value Entered by the user is ${d}`);
-    } else {
-      reject("User have not Entered Data");
-    }
-  });
-};
-
-let inp = "Hay";
-
-const p1 = data(inp);
-
-p1.then((v) => {
-  console.log(v);
-  return v.toUpperCase();
-})
-  .then((w) => {
-    console.log(w);
-    return w.toLowerCase();
-  })
-  .then((a) => {
-    console.log(a);
-  });
-
-p1.catch((err) => {
-  console.log("Reject Block Executed", err);
-});
-
-// catch code will execute as no argument is passed if the inp varaible is passed to data function as arugement the the value of the resolve will be displayed
-
-
-
-
-
-
-
-
-
-//   Async/Await
-
-// It's the sugar synthatic code for promises to reduce the line of code,it's easy to use and undersatndable.It's also used to perform asynchronous programming.
-
-// Real world example
-
-const fetchData = async () => {
-  try {
-    const res = await fetch("Some url");
-    const data = res.json();
-    console.log(data);
-  } catch (error) {
-    console.log("Network Error!!!");
+const add = (...arg) => {
+  let sum = 0;
+  for (v of arg) {
+    sum += v;
   }
+  console.log("Sum of Rest values", sum); //Sum of Rest values 45
 };
+
+add(1, 2, 3, 4, 5, 6, 7, 8, 9);
+
+// 2)
+
+function intro(name, ...spec) {
+  console.log(`Welcome, ${name}!, Your Qualities are: `);
+  for (let int of spec) {
+    console.log(int);
+  }
+}
+
+intro("zainab", "WebDeveloper,", "Software Engineering,", "Fighter,", "Killer");
