@@ -1,13 +1,29 @@
-import { add,subtract } from "./utils.mjs";//named import
-import greet from "./utils.mjs";//default import
+// Event Bubbling
+
+// In this,when an event occur it start from the target element and traverse/move in the upward direction until it reaches the root element in the DOM tree.
 
 
 
+// Event Capturing
 
-greet("Zainab Rehman")
+// In this,when an event occur it start from the root element of the DOM and traverse/move in the downward direction until it reaches the target element.
 
-let sum = add(12,6)
-console.log("Sum Function is called: ",sum);
+let container = document.getElementById("container")
+let innerContainer = document.getElementById("inner-container")
+let button = document.getElementById("button")
 
-let sub = subtract(5,2)
-console.log("Subtract Function is called: ",sub);
+document.addEventListener('click', function(event) {
+    console.log('Document clicked!');
+  }, true); // Capture phase
+  
+  container.addEventListener('click', function(event) {
+    console.log('Container clicked!');
+  }, false); // Bubbling phase
+  
+  innerContainer.addEventListener('click', function(event) {
+    console.log('Inner container clicked!');
+  }, false); // Bubbling phase
+  
+  button.addEventListener('click', function(event) {
+    console.log('Button clicked!');
+  }, false); // Bubbling phase
